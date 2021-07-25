@@ -21,13 +21,19 @@ async function handler(req, res) {
         res.end()
         return
     }
+
+    if (question.type == 'SOA') {
+        server.zones[qHostname] = parseZone[qType]
+    }
+
     if (question.type == 'A') {
         const answer = parseZone[qType].find(e => e.name === qHostname)
         res.answer.push(answer)
     }
-    if (qType === 'SOA') {
-        server.zones[qHostname] = parseZone[qType]
-        console.log(server.zones)
+
+    if (qType === 'NS') {
+        const nsAnswer = parseZone[qType] || []
+        res.answer.push(...nsAnswer)
     }
     res.end()
     delete server.zones[qHostname]

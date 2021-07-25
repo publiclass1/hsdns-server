@@ -1,8 +1,0 @@
-PUT http://18.169.249.10::8080/domains/my.go
-Content-Type: application/json
-
-{
-    "ip": "191.1.2.3",
-    "domain":"my.go",
-    "name_server":"ns1.testnames.link"
-}

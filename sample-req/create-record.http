@@ -1,0 +1,8 @@
+PUT http://18.169.249.10:3001/domains/bulknames.link
+Content-Type: application/json
+
+{
+    "ip": "18.169.249.10",
+    "domain":"bulknames.link",
+    "name_server":"ns1.bulknames.link"
+}

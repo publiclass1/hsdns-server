@@ -1,0 +1,23 @@
+# PUT A Records
+PUT http://localhost:8080/domains/my.go/update
+Content-Type: application/json
+
+{
+    "type":"NS",
+    "value":[
+        {
+            "class": "IN",
+            "type": "NS",
+            "name": "my.go",
+            "data": "ns1.my.go",
+            "ttl": 3600
+        },
+        {
+            "class": "IN",
+            "type": "NS",
+            "name": "my.go",
+            "data": "ns2.my.go",
+            "ttl": 3600
+        }
+    ]
+}

@@ -1,2 +1,2 @@
-GET http://localhost:8080/domains/my.go
+GET http://18.169.249.10:3001/domains/bulknames.link
 Accept: application/json
