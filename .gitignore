@@ -1,3 +1,4 @@
 node_modules
 zones
 .cache
+.env

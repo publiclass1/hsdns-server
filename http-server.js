@@ -38,6 +38,9 @@ function createDNSRecord(domain, payload) {
         name_server = NAME_SERVER,
         ttl = DNS_TTL
     } = payload
+    const serial = new Date().toISOString()
+        .replace(/T.+/, '')
+        .replace(/[^0-9]/g, '') + Math.floor(Math.random() * 100);
 
     return {
         "SOA": {
@@ -47,7 +50,7 @@ function createDNSRecord(domain, payload) {
             "data": {
                 "mname": name_server,
                 "rname": host_manager,
-                "serial": Date.now(),
+                "serial": serial,
                 "refresh": DNS_REFRESH,
                 "retry": DNS_RETRY,
                 "expire": DNS_EXPIRE,
@@ -67,4 +70,10 @@ function createDNSRecord(domain, payload) {
 }
 
 
-app.listen(PORT)
+app.listen(PORT, function () {
+    console.log('Running at ', PORT)
+})
+
+app.on('error', function (err) {
+    console.log(err)
+})
