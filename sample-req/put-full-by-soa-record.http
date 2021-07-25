@@ -1,0 +1,22 @@
+# PUT SOA Records
+PUT http://localhost:8080/domains/my.go/update
+Content-Type: application/json
+
+{
+    "type":"SOA",
+    "value":{
+        "class": "IN",
+        "type": "SOA",
+        "name": "my.go",
+        "data": {
+            "mname": "ns1.testnames.link",
+            "rname": "paulbaker.domainers.com",
+            "serial": "2021072578",
+            "refresh": 7200,
+            "retry": 2000,
+            "expire": 1209600,
+            "ttl": 3600
+        }
+    }
+    
+}

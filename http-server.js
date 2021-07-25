@@ -31,6 +31,24 @@ app.put('/domains/:name', async (req, res) => {
     res.json(data)
 })
 
+app.put('/domains/:name/update', async (req, res) => {
+    const name = req.params.name
+    const { type, value } = req.body
+    const zone = await diskCache.get(name)
+    if (!zone || !type) {
+        res.status(404).end()
+    }
+    zone[type.toUpperCase()] = value
+    await diskCache.set(name, zone)
+    res.json(zone)
+})
+
+app.get('/ping', function (req, res) {
+    res.status(200).send('pong')
+})
+
+
+
 function createDNSRecord(domain, payload) {
     const {
         ip,

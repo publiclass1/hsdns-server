@@ -5,7 +5,7 @@ const dnsd = require('dnsd')
 const diskCache = require('./cache')
 
 
-const PORT = process.env.DNS_PORT || 5353
+const PORT = process.env.DNS_PORT || 5333
 const HOST = process.env.HOST || 'localhost'
 
 const server = dnsd.createServer(handler)
