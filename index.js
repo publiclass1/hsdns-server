@@ -5,6 +5,7 @@ const { execSync } = require('child_process')
 const app = express()
 app.use(bodyParser.json())
 
+const BIND_DIR = '/var/lib/bind'
 const ips = ['18.169.249.10']
 
 const port = process.env.PORT || 3000
@@ -14,22 +15,25 @@ app.post('/domains', (req, res) => {
         domains = [],
         ip = randomIp
     } = req.body
-
+    const rs = []
     for (let domain of domains) {
-        const cmd = `bash ${__dirname}/scripts/make-zone.sh '${domain}' '${ip}'`
-        console.log(cmd)
-        execSync(cmd)
+        const cmd1 = `sudo bash ${__dirname}/scripts/zone-creator.sh '${domain}' '${ip}' > ${BIND_DIR}/${domain}.hosts`
+        const cmd2 = `sudo bash ${__dirname}/scripts/make-zone.sh '${domain}' '${ip}'`
+        rs.push(execSync(cmd1).toString())
+        rs.push(execSync(cmd2).toString())
     }
 
-    execSync('rndc reload')
+    execSync('sudo rndc reload')
 })
 
 app.delete('/domains/:name', function (req, res) {
     const domain = req.params.name
-
-
-
-    res.json({})
+    const cmd1 = `sudo bash ${__dirname}/scripts/remove-zone.sh '${domain}'`
+    const rs = execSync(cmd1)
+    execSync('sudo rndc reload')
+    res.json({
+        rs
+    })
 })
 
 app.listen(port, () => {
