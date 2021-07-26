@@ -8,5 +8,4 @@ echo -e "zone \"$DOMAIN\" {
      type master;
      file \"$FILE\";
 };
-
 " >> /etc/bind/named.conf.local
