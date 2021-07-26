@@ -1,4 +1,5 @@
 require('dotenv').config()
+const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const { execSync } = require('child_process')
@@ -16,17 +17,21 @@ app.post('/domains', (req, res) => {
         ip = randomIp
     } = req.body
     const rs = []
+
     for (let domain of domains) {
-        const cmd1 = `sudo bash ${__dirname}/scripts/make-hosts.sh '${domain}' '${ip}' > ${BIND_DIR}/${domain}.hosts`
-        const cmd2 = `sudo bash ${__dirname}/scripts/make-zone.sh '${domain}' '${ip}'`
-        rs.push(execSync(cmd1).toString())
-        rs.push(execSync(cmd2).toString())
+        if (!fs.existsSync(`${BIND_DIR}/${domain}.hosts`)) {
+            const cmd1 = `sudo bash ${__dirname}/scripts/make-hosts.sh '${domain}' '${ip}' > ${BIND_DIR}/${domain}.hosts`
+            const cmd2 = `sudo bash ${__dirname}/scripts/make-zone.sh '${domain}'`
+            const cmd3 = `sudo chown bind:bind /var/lib/bind/${domain}.hosts`
+            rs.push(execSync(cmd1).toString())
+            rs.push(execSync(cmd2).toString())
+            rs.push(execSync(cmd3).toString())
+        }
     }
 
     execSync('sudo rndc reload')
-
     res.json({
-        rs
+        status: rs
     })
 })
 
