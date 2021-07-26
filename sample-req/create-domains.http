@@ -1,11 +1,10 @@
 
-POST http://localhost:3000/domains
+POST http://18.169.249.10:3001/domains
 Content-Type: application/json
 
 {
+    "ip":"18.169.249.10",
    "domains":[
-       "sample.com",
-       "1sample.com",
-       "2sample.com"
+       "bulknames.link"
    ]
 }

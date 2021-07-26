@@ -5,7 +5,7 @@ const { execSync } = require('child_process')
 const app = express()
 app.use(bodyParser.json())
 
-const ips = ['18.169.249.10', '18.169.249.11']
+const ips = ['18.169.249.10']
 
 const port = process.env.PORT || 3000
 app.post('/domains', (req, res) => {
@@ -21,7 +21,7 @@ app.post('/domains', (req, res) => {
         execSync(cmd)
     }
 
-    // execSync('rndc reload')
+    execSync('rndc reload')
 })
 
 app.delete('/domains/:name', function (req, res) {
