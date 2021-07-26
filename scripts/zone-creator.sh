@@ -34,7 +34,8 @@ SERIAL=$(date +"%Y%m%d")01                     # Serial yyyymmddnn
  
 
 # set default ns1
-NS1="ns1.testnames.link"
+NAMESERVERS=("ns1.testnames.link" "ns2.testnames.link")
+NS1=${NAMESERVERS[0]}
  
 ###### start SOA ######
 echo "\$TTL ${TTL}"
@@ -47,8 +48,14 @@ echo "			${MAXNEGTIVE})		; Minimum negative caching of 1 hour"
 echo ""
 ###### start A pointers #######
 # A Records - Default IP for domain 
-echo '; A Records'
-echo "${DOMAIN}. 			${ATTL}	IN 	A	${WWWIP}"
-echo "; CNAME Records"
+echo "${DOMAIN}.			${ATTL}	IN 	A	${WWWIP}"
 echo "www.${DOMAIN}.			${ATTL}	IN	CNAME	${DOMAIN}."
+###### start Name servers #######
+# Get length of an array
+tLen=${#NAMESERVERS[@]}
  
+# use for loop read all nameservers
+for (( i=0; i<${tLen}; i++ ));
+do
+	echo "$DOMAIN.			${ATTL} IN NS  ${NAMESERVERS[$i]}."
+done

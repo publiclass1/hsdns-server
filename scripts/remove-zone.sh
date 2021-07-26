@@ -3,7 +3,7 @@
 # ./removezone.sh yourdomain.com
 rootdir="/etc/bind"
 zonedir="/var/lib/bind"
-conf="*.conf"
+conf="named.conf.local"
 zone=$1
-sed -e "/^zone \"$zone\" {/,/^};$/ d" -i $rootdir/$conf
-rm $zonedir/$zone.hosts
+sudo sed -e "/^zone \"$zone\" {/,/^};$/ d" -i $rootdir/$conf
+sudo rm $zonedir/$zone.hosts
