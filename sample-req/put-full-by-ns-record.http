@@ -1,5 +1,5 @@
 # PUT A Records
-PUT http://localhost:8080/domains/my.go/update
+PUT http://18.169.249.10:3001/domains/testnames.link/update
 Content-Type: application/json
 
 {
@@ -8,15 +8,15 @@ Content-Type: application/json
         {
             "class": "IN",
             "type": "NS",
-            "name": "my.go",
-            "data": "ns1.my.go",
+            "name": "testnames.link",
+            "data": "ns1.testnames.link",
             "ttl": 3600
         },
         {
             "class": "IN",
             "type": "NS",
-            "name": "my.go",
-            "data": "ns2.my.go",
+            "name": "testnames.link",
+            "data": "ns2.testnames.link",
             "ttl": 3600
         }
     ]

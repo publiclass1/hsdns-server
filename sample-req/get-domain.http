@@ -1,2 +1,2 @@
-GET http://18.169.249.10:3001/domains/bulknames.link
+GET http://18.169.249.10:3001/domains/testnames.link
 Accept: application/json

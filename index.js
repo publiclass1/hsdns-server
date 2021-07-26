@@ -1,40 +1,37 @@
 require('dotenv').config()
+const express = require('express')
+const bodyParser = require('body-parser')
+const { execSync } = require('child_process')
+const app = express()
+app.use(bodyParser.json())
 
-const fs = require('fs')
-const dnsd = require('dnsd')
-const diskCache = require('./cache')
+const ips = ['18.169.249.10', '18.169.249.11']
 
+const port = process.env.PORT || 3000
+app.post('/domains', (req, res) => {
+    const randomIp = ips[Math.floor(Math.random() * ips.length)]
+    const {
+        domains = [],
+        ip = randomIp
+    } = req.body
 
-const PORT = process.env.DNS_PORT || 5333
-const HOST = process.env.HOST || 'localhost'
-
-const server = dnsd.createServer(handler)
-
-server.listen(PORT, HOST)
-
-async function handler(req, res) {
-    const question = res.question[0]
-    const qHostname = question.name
-    const qType = question.type
-    const parseZone = await diskCache.get(qHostname)
-    if (!parseZone) {
-        res.end()
-        return
+    for (let domain of domains) {
+        const cmd = `bash ${__dirname}/scripts/make-zone.sh '${domain}' '${ip}'`
+        console.log(cmd)
+        execSync(cmd)
     }
 
-    if (question.type == 'SOA') {
-        server.zones[qHostname] = parseZone[qType]
-    }
+    // execSync('rndc reload')
+})
 
-    if (question.type == 'A') {
-        const answer = parseZone[qType].find(e => e.name === qHostname)
-        res.answer.push(answer)
-    }
+app.delete('/domains/:name', function (req, res) {
+    const domain = req.params.name
 
-    if (qType === 'NS') {
-        const nsAnswer = parseZone[qType] || []
-        res.answer.push(...nsAnswer)
-    }
-    res.end()
-    delete server.zones[qHostname]
-}
+
+
+    res.json({})
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})

@@ -4,10 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev-dns": "nodemon index.js",
-    "dev-http": "nodemon http-server.js",
-    "start-dns": "node index.js",
-    "start-http": "node http-server.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -16,7 +14,6 @@
     "dnsd": "^0.9.6",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "expressjs": "^1.0.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
