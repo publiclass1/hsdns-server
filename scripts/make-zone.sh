@@ -4,7 +4,7 @@ CUR_DIR=`pwd`
 DOMAIN=$1
 WWWIP=$2
 FILE=/var/lib/bind/$DOMAIN.hosts
-
+$CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 if [ ! -f $FILE ];then
 
