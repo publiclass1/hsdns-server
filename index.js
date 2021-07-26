@@ -17,7 +17,7 @@ app.post('/domains', (req, res) => {
     } = req.body
     const rs = []
     for (let domain of domains) {
-        const cmd1 = `sudo bash ${__dirname}/scripts/zone-creator.sh '${domain}' '${ip}' > ${BIND_DIR}/${domain}.hosts`
+        const cmd1 = `sudo bash ${__dirname}/scripts/make-hosts.sh '${domain}' '${ip}' > ${BIND_DIR}/${domain}.hosts`
         const cmd2 = `sudo bash ${__dirname}/scripts/make-zone.sh '${domain}' '${ip}'`
         rs.push(execSync(cmd1).toString())
         rs.push(execSync(cmd2).toString())
