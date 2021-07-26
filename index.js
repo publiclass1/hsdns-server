@@ -24,6 +24,10 @@ app.post('/domains', (req, res) => {
     }
 
     execSync('sudo rndc reload')
+
+    res.json({
+        rs
+    })
 })
 
 app.delete('/domains/:name', function (req, res) {
