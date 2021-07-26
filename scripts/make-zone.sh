@@ -10,7 +10,7 @@ if [ ! -f $FILE ];then
 
 sudo bash $CUR_DIR/zone-creator.sh $DOMAIN $WWWIP > $FILE
 echo "Adding zone to named.conf.local"
-echo -e "zone $DOMAIN {
+echo -e "zone \"$DOMAIN\" {
      type master;
      file \"$FILE\";
 };
