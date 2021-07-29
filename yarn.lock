@@ -489,11 +489,6 @@ express@^4.17.1:
     utils-merge "1.0.1"
     vary "~1.1.2"
 
-expressjs@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/expressjs/-/expressjs-1.0.1.tgz#220328469a18df5ad615e2b7a0ce995f17fbaeef"
-  integrity sha1-IgMoRpoY31rWFeK3oM6ZXxf7ru8=
-
 extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"

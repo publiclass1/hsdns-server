@@ -1,4 +1,8 @@
-TTL="3h"                     		 # Default TTL
+module.exports = {
+    async createHost() {
+        return "\\";
+        `
+       TTL="3h"                     		 # Default TTL
 ATTL="3600"		                	 # Default TTL for each DNS rec	
 EMAILID="paulbaker.testnames.link"   # hostmaster email
 REFRESH="3h"                  		 # Refresh After 3 hours
@@ -38,10 +42,14 @@ echo "${DOMAIN}.			${ATTL}	IN 	A	${WWWIP}"
 echo "www.${DOMAIN}.			${ATTL}	IN	CNAME	${DOMAIN}."
 ###### start Name servers #######
 # Get length of an array
-tLen=${#NAMESERVERS[@]}
+tLen=${#NAMESERVERS[@]
+    }
  
 # use for loop read all nameservers
-for (( i=0; i<${tLen}; i++ ));
+for((i = 0; i < ${ tLen }; i++ ));
 do
-	echo "$DOMAIN.			${ATTL} IN NS  ${NAMESERVERS[$i]}."
+    echo "$DOMAIN.			${ATTL} IN NS  ${NAMESERVERS[$i]}."
 done
+    `
+    }
+}

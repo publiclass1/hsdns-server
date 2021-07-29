@@ -1,0 +1,22 @@
+
+echo "\$TTL ${TTL}"
+echo "${DOMAIN}.	IN	SOA	${NS1}.	${EMAILID}.("
+echo "			${SERIAL}	; Serial yyyymmddnn"
+echo "			${REFRESH}		; Refresh After 3 hours"
+echo "			${RETRY}		; Retry Retry after 1 hour"
+echo "			${EXPIER}		; Expire after 1 week"
+echo "			${MAXNEGTIVE})		; Minimum negative caching of 1 hour"
+echo ""
+###### start A pointers #######
+# A Records - Default IP for domain 
+echo "${DOMAIN}.			${ATTL}	IN 	A	${WWWIP}"
+echo "www.${DOMAIN}.			${ATTL}	IN	CNAME	${DOMAIN}."
+###### start Name servers #######
+# Get length of an array
+tLen=${#NAMESERVERS[@]}
+ 
+# use for loop read all nameservers
+for (( i=0; i<${tLen}; i++ ));
+do
+	echo "$DOMAIN.			${ATTL} IN NS  ${NAMESERVERS[$i]}."
+done

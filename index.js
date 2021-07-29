@@ -17,6 +17,7 @@ app.post('/domains', (req, res) => {
         ip = randomIp
     } = req.body
     const rs = []
+    const domainsStatus = {}
 
     for (let domain of domains) {
         if (!fs.existsSync(`${BIND_DIR}/${domain}.hosts`)) {
@@ -27,11 +28,13 @@ app.post('/domains', (req, res) => {
             rs.push(execSync(cmd2).toString())
             rs.push(execSync(cmd3).toString())
         }
+        domainsStatus[domain] = true
     }
 
     execSync('sudo rndc reload')
     res.json({
-        status: rs
+        status: rs,
+        domains: domainsStatus
     })
 })
 
