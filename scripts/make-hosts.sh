@@ -1,17 +1,3 @@
-#!/bin/bash
-# A Bash shell script to create BIND ZONE FILE.
-# Tested under BIND 8.x / 9.x, RHEL, DEBIAN, Fedora Linux.
-# -------------------------------------------------------------------------
-# Copyright (c) 2002,2009 Vivek Gite <vivek@nixcraft.com>
-# This script is licensed under GNU GPL version 2.0 or above
-# -------------------------------------------------------------------------
-# This script is part of nixCraft shell script collection (NSSC)
-# Visit http://bash.cyberciti.biz/ for more information.
-# -------------------------------------------------------------------------
-# Examples:
-# ./mkzone.sh example.com default-www-IP-address
-# ./mkzone.sh cyberciti.biz 74.12.5.1
-
 TTL="3h"                     		 # Default TTL
 ATTL="3600"		                	 # Default TTL for each DNS rec	
 EMAILID="paulbaker.testnames.link"   # hostmaster email
