@@ -48,6 +48,18 @@ app.delete('/domains/:name', function (req, res) {
     })
 })
 
+app.get('/domains/:name', function (req, res) {
+    const domain = req.params.name
+    const domainPath = `${BIND_DIR}/${domain}.hosts`
+    let content = '';
+    if (fs.existsSync(domainPath)) {
+        content = fs.readFileSync(domainPath, { 'encoding': 'utf8' })
+    }
+    res.json({
+        record: content
+    })
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
