@@ -7,7 +7,7 @@ const app = express()
 app.use(bodyParser.json())
 
 const BIND_DIR = '/var/lib/bind'
-const ips = ['18.169.249.10']
+const ips = ['18.170.103.90']
 
 const port = process.env.PORT || 3000
 app.post('/domains', (req, res) => {
