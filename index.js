@@ -20,6 +20,7 @@ app.post('/domains', (req, res) => {
 
     for (let domain of domains) {
         if (!fs.existsSync(`${BIND_DIR}/${domain}.hosts`)) {
+            console.log('Creating domain dns ', domain)
             const cmd1 = `sudo bash ${__dirname}/scripts/make-hosts.sh '${domain}' '${ip}' > ${BIND_DIR}/${domain}.hosts`
             const cmd2 = `sudo bash ${__dirname}/scripts/make-zone.sh '${domain}'`
             const cmd3 = `sudo chown bind:bind /var/lib/bind/${domain}.hosts`
@@ -30,7 +31,9 @@ app.post('/domains', (req, res) => {
         domainsStatus[domain] = true
     }
 
+    console.log('reloading rndc')
     execSync('sudo rndc reload')
+    console.log('command status', rs)
     res.json({
         status: rs,
         domains: domainsStatus
