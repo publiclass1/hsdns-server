@@ -7,14 +7,13 @@ const app = express()
 app.use(bodyParser.json())
 
 const BIND_DIR = '/var/lib/bind'
-const ips = ['18.170.103.90']
+const MAIN_IP = process.env.MAIN_IP || '18.170.103.90'
 
 const port = process.env.PORT || 3000
 app.post('/domains', (req, res) => {
-    const randomIp = ips[Math.floor(Math.random() * ips.length)]
     const {
         domains = [],
-        ip = randomIp
+        ip = MAIN_IP
     } = req.body
     const rs = []
     const domainsStatus = {}
