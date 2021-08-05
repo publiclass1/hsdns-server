@@ -17,7 +17,7 @@ app.post('/domains', (req, res) => {
     } = req.body
     const rs = []
     const domainsStatus = {}
-
+    console.log({ domains, ip })
     for (let domain of domains) {
         if (!fs.existsSync(`${BIND_DIR}/${domain}.hosts`)) {
             console.log('Creating domain dns ', domain)
